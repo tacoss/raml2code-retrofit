@@ -1,0 +1,45 @@
+{
+  "name": "raml2code-retrofit",
+  "version": "0.0.1",
+  "description": "Retrofit generator from RAML Spec",
+  "main": "lib/retrofit-client/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:gextech/raml2code-retrofit.git"
+  },
+  "keywords": [
+    "raml",
+    "retrofit",
+    "java",
+    "api",
+    "client"
+  ],
+  "author": "Tomas Salazar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gextech/raml2code-retrofit/issues"
+  },
+  "homepage": "https://github.com/gextech/raml2code-retrofit",
+  "devDependencies": {
+    "gulp-util": "3.0.1",
+    "chai": "^1.10.0",
+    "del": "^1.1.1",
+    "gulp": "^3.8.10",
+    "glob": "^4.3.5",
+    "gulp-coffee": "2.2.0",
+    "gulp-jasmine": "^1.0.1",
+    "gulp-mocha": "2.0.0",
+    "mocha": "^2.0.1",
+    "run-sequence": "^1.0.2",
+    "data2code": "0.0.4",
+    "raml2code-fixtures": "0.0.3"
+  },
+  "dependencies": {
+    "camel-case": "^1.1.1",
+    "lodash": "^3.3.1",
+    "pascal-case": "^1.1.0"
+  }
+}
