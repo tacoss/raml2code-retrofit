@@ -1,6 +1,6 @@
 {
   "name": "raml2code-retrofit",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Retrofit generator from RAML Spec",
   "main": "lib/retrofit-client/index.js",
   "scripts": {
@@ -34,7 +34,6 @@
     "gulp-mocha": "2.0.0",
     "gulp-util": "3.0.1",
     "mocha": "^2.0.1",
-    "raml2code": "^0.8.41",
     "raml2code-fixtures": "0.0.8",
     "run-sequence": "^1.0.2"
   },
