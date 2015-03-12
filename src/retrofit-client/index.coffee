@@ -7,7 +7,7 @@ _ = require('lodash')
 generator = {}
 #generator.helpers = commonHelpers
 
-generator.template = require("../tmpl/retrofitClient.hbs")
+generator.template = {'{{fileName}}':require("../tmpl/retrofitClient.hbs")}
 
 customAdapter = (method, methodParsed)->
 
@@ -95,11 +95,10 @@ generator.parser = (data) ->
     data.extra.importPojos = "#{data.extra.importPojos}.#{data.version}"
     model.extra = data.extra
 
-  result = {}
   version =  if data.version then "#{data.version}/"  else ""
   model.className = data.title.split(" ").join("")
-  result["#{version}#{model.className}.java"] = model
-  parsed.push result
+  model.fileName ="#{version}#{model.className}.java"
+  parsed.push model
 
   parsed
 
