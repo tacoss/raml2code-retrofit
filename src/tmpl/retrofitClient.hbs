@@ -14,16 +14,16 @@ import {{extra.importPojos}}.*;
 public interface {{{className}}} {
 
 {{#methods}}
-  @{{annotation}}("/{{{../version}}}{{{uri}}}")
-  {{#if additionalAnnotation}}
-  @{{{additionalAnnotation}}}
-  {{/if}}
   {{#if comments}}
   /**
   {{#comments}}
     * {{this}}
   {{/comments}}
   */
+  {{/if}}
+  @{{annotation}}("/{{{../version}}}{{{uri}}}")
+  {{#if additionalAnnotation}}
+  @{{{additionalAnnotation}}}
   {{/if}}
   Observable<{{{respond}}}> {{{name}}}({{#each args}}{{#if @index}},{{/if}}
     {{{kind}}} {{{classType}}} {{name}}{{/each}});

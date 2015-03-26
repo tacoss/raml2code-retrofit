@@ -11,11 +11,11 @@ import com.pojos.v1.*;
 
 public interface FixtureAPI {
 
-  @GET("/v1/cats")
   /**
    * Use @QueryMap to provide the following optional parameters:
    * searchBy it must be parseable to @String
    */
+  @GET("/v1/cats")
   Observable<List> getGatitos(
       @QueryMap Map<String, String> options);
 
@@ -23,12 +23,12 @@ public interface FixtureAPI {
   Observable<ComplexCat> postGatitos(
       @Body ComplexCat complexCat);
 
-  @GET("/v1/cats/{catId}")
   /**
    * Use @QueryMap to provide the following optional parameters:
    * filterBy it must be parseable to @String
    * orderBy it must be parseable to @String
    */
+  @GET("/v1/cats/{catId}")
   Observable<ComplexCat> getGatitoById(
       @Path("catId") String catId,
       @Query("clientSecret") String clientSecret,
