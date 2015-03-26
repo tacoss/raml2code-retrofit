@@ -60,35 +60,29 @@ generator.parser = (data) ->
 
   for method in methodParse
 
-    notReqArgs = _.filter(method.args, (it)->
+    method.comments = []
+    args = method.args
+    method.args = []
+    #Find not required arguments
+    notReqArgs = _.filter(args, (it)->
       it.required == false
     )
 
+    reqArgs = _.difference(args, notReqArgs)
+
+    method.args = method.args.concat(reqArgs)
+
     if notReqArgs and notReqArgs.length > 0
-
-      reqArgs = _.difference(method.args, notReqArgs)
-      permutations = (Math.pow(2, notReqArgs.length)) - 1
-
-      while permutations >= 0
-        shallowMethod = _.cloneDeep(method)
-        d = arrayFromMask(permutations)
-        permuted = resolveArrayByMask(d, notReqArgs)
-        name = shallowMethod.name
-        for arg in permuted
-          name = name  + "And#{pascalCase(arg.name)}"
-
-        newArgs = reqArgs.concat(permuted)
-
-        shallowMethod.args = newArgs
-        shallowMethod.name = name
-        methodParsePermuted.push shallowMethod
-
-        permutations--
+      method.args.push({kind:'@QueryMap', classType: 'Map<String, String>', name : 'options' })
+      #add comments to interface
+      method.comments.push("Use @QueryMap to provide the following optional parameters: ")
+      for arg in notReqArgs
+        method.comments.push("#{arg.name} it must be parseable to @#{arg.classType} ")
     else
       methodParsePermuted.push method
 
   model = {}
-  model.methods = methodParsePermuted
+  model.methods = methodParse
   model.version = data.version
   if data.extra
     data.extra.package = "#{data.extra.package}.#{data.version}"
@@ -101,28 +95,5 @@ generator.parser = (data) ->
   parsed.push model
 
   parsed
-
-#mask array taken from mozilla
-arrayFromMask = (nMask) ->
-  # nMask must be between -2147483648 and 2147483647
-  throw new TypeError("arrayFromMask - out of range")  if nMask > 0x7fffffff or nMask < -0x80000000
-  nShifted = nMask
-  aFromMask = []
-
-  while nShifted
-    aFromMask.push(Boolean(nShifted & 1))
-    nShifted >>>= 1
-  aFromMask
-
-resolveArrayByMask = (mask, array) ->
-  res = []
-  i = array.length - 1
-  j = 0
-
-  while i >= 0
-    res.push array[i] if mask[j]
-    i--
-    j++
-  res
 
 module.exports = generator
