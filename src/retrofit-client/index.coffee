@@ -83,10 +83,11 @@ generator.parser = (data) ->
 
   model = {}
   model.methods = methodParse
-  model.version = data.version
+  model.version = if data.version then "/#{data.version}" else ""
   if data.extra
-    data.extra.package = "#{data.extra.package}.#{data.version}"
-    data.extra.importPojos = "#{data.extra.importPojos}.#{data.version}"
+    if data.version
+      data.extra.package = "#{data.extra.package}.#{data.version}"
+      data.extra.importPojos = "#{data.extra.importPojos}.#{data.version}"
     model.extra = data.extra
 
   version =  if data.version then "#{data.version}/"  else ""
